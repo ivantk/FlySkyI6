@@ -87,7 +87,7 @@ __attribute__((section (".mod_sensors80"))) const uint8_t SENSORS_80[] =
 		"GAlt\0"  /*0x82*/
 		"Alt\0\0" /*0x83*/
 		"MxAl\0"  /*0x84*/
-		"S85\0\0" /*0x85*/
+		"Dep\0\0" /*0x85*/
 		"S86\0\0" /*0x86*/
 		"S87\0\0" /*0x87*/
 		"S88\0\0" /*0x88*/
@@ -303,7 +303,7 @@ const uint8_t __attribute__((section (".mod_sensDesc80"))) sensorDesc80[] = {
 		STD_SENSOR|SIGNED__|MUL_100|UNIT_M,		//Alt -> GPS alt
 		STD_SENSOR|SIGNED__|MUL_100|UNIT_M,		//ALT
 		STD_SENSOR|SIGNED__|MUL_100|UNIT_M,	//Max Alt
-		STD_SENSOR|UNSIGNED|MUL_001|UNIT_NONE,	//s85
+		STD_SENSOR|UNSIGNED|MUL_100|UNIT_M,	//Dep (0x85)
 		STD_SENSOR|UNSIGNED|MUL_001|UNIT_NONE,	//s86
 		STD_SENSOR|UNSIGNED|MUL_001|UNIT_NONE,	//s87
 		STD_SENSOR|UNSIGNED|MUL_001|UNIT_NONE,	//s88
