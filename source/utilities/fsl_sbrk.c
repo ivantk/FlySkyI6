@@ -30,6 +30,10 @@
 #if defined(__GNUC__)
 #include <stdio.h>
 #include <errno.h>
+#include <sys/types.h>
+#ifndef caddr_t
+typedef char * caddr_t;
+#endif
 #endif
 
 #if defined(__GNUC__)
