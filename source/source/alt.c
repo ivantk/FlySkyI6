@@ -294,12 +294,12 @@ void printTimer(int32_t skipPrint)
 	uint16_t sensorValue = getSensorValue(IBUS_MEAS_TYPE_DEPTH, 0, 0);
 	formatSensorValue(buffer, IBUS_MEAS_TYPE_DEPTH, sensorValue);
 	// strcatCall(buffer, sensorValueBuffer);
-	displayTextAt((char *)getSensorName(IBUS_MEAS_TYPE_DEPTH), 1, 0, 0);
+	if(skipPrint ==0) displayTextAt((char *)getSensorName(IBUS_MEAS_TYPE_DEPTH), 1, 0, 0);
 	if (buffer[0] == '3' && buffer[1] == '2' && buffer[2] == '7')
 	{ // invalid depth
 		buffer[0] = 0;
 	}
-	displayTextAt((char *)buffer, 29, 0, 0);
+	if(skipPrint ==0) displayTextAt((char *)buffer, 29, 0, 0);
 }
 
 uint32_t isTimerActive()
