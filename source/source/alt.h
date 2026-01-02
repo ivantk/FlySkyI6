@@ -102,6 +102,7 @@ __attribute__((section (".mod_lastTimerUpdate"))) uint32_t  lastTimerUpdate;
 __attribute__((section (".mod_ticks100ms"))) uint8_t  ticks100MS;
 __attribute__((section (".mod_mavlinkGPSFrame"))) uint8_t mavlinkGPSFrame[22]; 	//22bytes
 __attribute__((section (".mod_maxSNR"))) int32_t maxSNR;
+__attribute__((section (".mod_depthSensorValues "))) uint8_t depthSensorValues[114]; // Y coordinates of depth image
 
 __attribute__((section (".mod_altSensorMemory"))) uint32_t initPressure = 0;
 __attribute__((section (".mod_altSensorMemory"))) int32_t initTemperature = 0;

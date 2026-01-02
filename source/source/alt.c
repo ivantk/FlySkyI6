@@ -11,7 +11,9 @@
 #include "mod.h"
 #include "print.h"
 #include "fsl_gpio.h"
+#include "screen.h"
 #include "fsl_port.h"
+
 #define OPERATOR_LT 0
 #define OPERATOR_GT 1
 
@@ -1412,29 +1414,41 @@ void displaySensors()
 			xPos = 1;
 		}
 	}
-	for (unsigned i = 0; i < sensorCount; i++)
-	{
-		if (*settings != 0xFF)
-		{
-			strcatCall(buffer, (const char *)getSensorName(*settings));
-			bufferOffset = 0;
-			while (buffer[bufferOffset] != 0)
-				bufferOffset++;
-			buffer[bufferOffset++] = ' ';
-			buffer[bufferOffset] = 0;
-			if (*settings >= IBUS_MEAS_TYPE_GPS_LAT && *settings <= IBUS_MEAS_TYPE_GPS_ALT)
+
+	if (mainScreenIndex != 1) {
+			for (unsigned i = 0; i < sensorCount; i++)
 			{
-				formatSensorValue(buffer + bufferOffset, *settings, *settings - 0x80);
+				if (*settings != 0xFF)
+				{
+					strcatCall(buffer, (const char *)getSensorName(*settings));
+					bufferOffset = 0;
+					while (buffer[bufferOffset] != 0)
+						bufferOffset++;
+					buffer[bufferOffset++] = ' ';
+					buffer[bufferOffset] = 0;
+					if (*settings >= IBUS_MEAS_TYPE_GPS_LAT && *settings <= IBUS_MEAS_TYPE_GPS_ALT)
+					{
+						formatSensorValue(buffer + bufferOffset, *settings, *settings - 0x80);
+					}
+					else
+					{
+						formatSensorData(*settings, 0, buffer + bufferOffset);
+					}
+					while (buffer[bufferOffset] != 0)
+						bufferOffset++;
+					displayTextAt(buffer, xPos, (i * 8) + yPos, 0);
+				}
+				settings++;
 			}
-			else
-			{
-				formatSensorData(*settings, 0, buffer + bufferOffset);
-			}
-			while (buffer[bufferOffset] != 0)
-				bufferOffset++;
-			displayTextAt(buffer, xPos, (i * 8) + yPos, 0);
-		}
-		settings++;
+	} else {
+		for(int i =0; i < 1024; i++) screen_buffer[i]= 0;
+		char buffer[64];
+		buffer[0] = 0;
+		uint16_t sensorValue = getSensorValue(IBUS_MEAS_TYPE_DEPTH, 0, 0);
+		formatSensorValue(buffer, IBUS_MEAS_TYPE_DEPTH, sensorValue);
+		displayTextAt((char *)buffer, 3, 3, 0);
+		drawRect(1, 1, 117, 63, 0);
+		//displaySmalString((char *)buffer, 100, 3);
 	}
 }
 

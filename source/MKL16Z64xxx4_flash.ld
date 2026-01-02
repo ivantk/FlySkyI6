@@ -127,6 +127,7 @@ SECTIONS
     *(.mod_varioMem);
     *(.mod_maxSNR);
     *(.mod_altSensorMemory);
+    *(.mod_depthSensorValues);
     KEEP(*(.AUX_MEM))
   } > m_data
 
@@ -153,7 +154,7 @@ SECTIONS
 	*(.mod_units);
 	*(.mod_unitsOffsets);
 	*(.mod_varioStrings);
-	*(.mod_timerNull);
+	*(.mod_timerNull);	
   }
   .mod_SIGNATURE_2780 0x2780 :
   {
@@ -284,6 +285,7 @@ SECTIONS
   *(.mod_getALT);
   *(.mod_prevSensorID);
   *(.mod_dead);
+  *(.mod_loadSettingsExt);
   }
   .reserved_after_code_AC34  0xAE44 : {
   *(.reserved_after_code_AC34);
@@ -338,8 +340,7 @@ SECTIONS
   .mod_code_65C8_68A7 0x65C8 :
   {
     *(.mod_parseAC);
-    *(.mod_displaySensors);
-    *(.mod_loadSettingsExt);
+    *(.mod_displaySensors);    
   }
   .reserved_after_code_65C8_68A7 0x68A8 : {
     *(.reserved_after_code_65C8_68A7);
