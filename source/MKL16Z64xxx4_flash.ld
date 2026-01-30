@@ -340,9 +340,9 @@ SECTIONS
   .mod_code_65C8_68A7 0x65C8 :
   {
     *(.mod_parseAC);
-    *(.mod_displaySensors);    
+    *(.mod_formatSensorValue);
   }
-  .reserved_after_code_65C8_68A7 0x68D8 : {
+  .reserved_after_code_65C8_68A7 0x68A8 : {
     *(.reserved_after_code_65C8_68A7);
   }
 
@@ -412,7 +412,7 @@ SECTIONS
    *(.mod_getSensorName);
    *(.mod_batteryConfig);
    *(.mod_printTimer);
-   *(.mod_formatSensorValue);
+   *(.mod_displaySensors);
    *(.mod_divMod);
    *(.mod_alarmConfig);
    *(.mod_timerConfig);
