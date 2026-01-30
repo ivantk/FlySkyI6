@@ -31,6 +31,7 @@
 #include <stdio.h>
 #include <errno.h>
 #include <sys/types.h>
+
 #ifndef _CADDR_T_DEFINED_FSL
 /* Some toolchains don't expose caddr_t via sys/types.h - provide fallback */
 typedef char * caddr_t;
