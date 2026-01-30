@@ -342,7 +342,7 @@ SECTIONS
     *(.mod_parseAC);
     *(.mod_displaySensors);    
   }
-  .reserved_after_code_65C8_68A7 0x68A8 : {
+  .reserved_after_code_65C8_68A7 0x68D8 : {
     *(.reserved_after_code_65C8_68A7);
   }
 

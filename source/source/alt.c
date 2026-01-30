@@ -1183,7 +1183,7 @@ void formatSensorValue(char *target, int sensorID, uint16_t sensorValue)
 {
 	const char *format = (const char *)formatNumber;
 	const char *unit = 0;
-	uint32_t result = (uint32_t)sensorValue;
+	uint32_t result = (sensorID == IBUS_MEAS_TYPE_DEPTH) ? (uint32_t)sensorValue + 5 : (uint32_t)sensorValue;
 	uint8_t negative = 0;
 	uint32_t result2 = 0;
 	uint32_t result3 = 0;
@@ -1292,8 +1292,14 @@ void formatSensorValue(char *target, int sensorID, uint16_t sensorValue)
 	sprintfCall(target, format, result, result2, result3, result4);
 	while (*target != 0)
 		target++;
-	if (unit != 0)
-		strcatCall(target, unit);
+	if (unit != 0) {
+		if (sensorID == IBUS_MEAS_TYPE_DEPTH) {
+			target--;
+			*target = 'm';
+		} else {
+			strcatCall(target, unit);
+		}
+	}
 }
 
 void configurePINS2()
@@ -1442,13 +1448,33 @@ void displaySensors()
 			}
 	} else {
 		for(int i =0; i < 1024; i++) screen_buffer[i]= 0;
-		char buffer[64];
-		buffer[0] = 0;
-		uint16_t sensorValue = getSensorValue(IBUS_MEAS_TYPE_DEPTH, 0, 0);
-		formatSensorValue(buffer, IBUS_MEAS_TYPE_DEPTH, sensorValue);
-		displayTextAt((char *)buffer, 3, 3, 0);
-		drawRect(1, 1, 117, 63, 0);
-		//displaySmalString((char *)buffer, 100, 3);
+
+		uint32_t sensorValue = (uint32_t)getSensorValue(IBUS_MEAS_TYPE_DEPTH, 0, 0);
+		sensorValue = longSensors[sensorValue];
+		uint32_t calc = 8 + ((sensorValue * 52) >> 9);
+		uint8_t y_pixel = (uint8_t)calc;
+		if (y_pixel < 10) y_pixel = 10;
+		if (y_pixel > 52) y_pixel = 52;
+
+		if(depthSensorValuesCount != DEPTH_SENSOR_PIXEL_LENGTH){
+			depthSensorValues[depthSensorValuesCount++] = y_pixel;
+		} else {
+			for (int i = 1; i < DEPTH_SENSOR_PIXEL_LENGTH; i ++) {
+				depthSensorValues[i - 1] = depthSensorValues[i];
+			}
+			depthSensorValues[DEPTH_SENSOR_PIXEL_LENGTH - 1] = y_pixel;
+		}
+
+		drawLine(122, 0, 122, 62, 0);
+		drawLine(0, 62, 121, 62, 0);
+
+		char bufferDepth[8];
+		formatSensorValue(bufferDepth, IBUS_MEAS_TYPE_DEPTH, sensorValue);
+		displayTextAt(bufferDepth, 80, 1, 0);
+
+		for (uint8_t x = 0; x < DEPTH_SENSOR_PIXEL_LENGTH; x++) {
+		    if (depthSensorValues[x] != 0) drawLine(x, depthSensorValues[x], x, 62, 0);
+		}
 	}
 }
 

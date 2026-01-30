@@ -68,7 +68,7 @@ all-swe: fs-i6-swe.elf secondary-outputs-swe
 fs-i6.elf: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: Cross ARM C++ Linker'
-	arm-none-eabi-g++ -mcpu=cortex-m0plus -mthumb -Os -fmessage-length=0 -fsigned-char -g3 -O0 -ffunction-sections -fdata-sections -Wall  -g -T "../MKL16Z64xxx4_flash.ld" -Xlinker --gc-sections -Wl,-Map,"fs-i6.map" --specs=nano.specs -specs=nosys.specs -Xlinker -z -Xlinker muldefs -o "fs-i6.elf" $(OBJS) $(USER_OBJS) $(LIBS)
+	arm-none-eabi-g++ -mcpu=cortex-m0plus -mthumb -Os -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g -T "../MKL16Z64xxx4_flash.ld" -Xlinker --gc-sections -Wl,-Map,"fs-i6.map" --specs=nano.specs -specs=nosys.specs -Xlinker -z -Xlinker muldefs -o "fs-i6.elf" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 fs-i6-swe.elf: PARAMS = -DSWE
