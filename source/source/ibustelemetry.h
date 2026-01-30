@@ -56,6 +56,7 @@
 
 
 //#define IBUS_MEAS_TYPE_ALT_FLYSKY		0xf9    // Altitude			//2 bytes signed in m
+#define IBUS_MEAS_TYPE_DEPTH IBUS_MEAS_TYPE_S85
 #define IBUS_MEAS_TYPE_SNR				0xfa    // SNR
 #define IBUS_MEAS_TYPE_NOISE			0xfb    // Noise
 #define IBUS_MEAS_TYPE_RSSI				0xfc    // RSSI

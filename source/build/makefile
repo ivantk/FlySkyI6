@@ -110,7 +110,7 @@ fs-i6-swe.siz: fs-i6-swe.elf
 	@echo ' '
 # Other Targets
 clean:
-	-$(RM) $(SECONDARY_SIZE)$(C++_DEPS)$(OBJS)$(C_DEPS)$(ASM_DEPS)$(CC_DEPS)$(SECONDARY_FLASH)$(CPP_DEPS)$(CXX_DEPS)$(C_UPPER_DEPS)$(S_UPPER_DEPS)$(SECONDARY_SIZE_SWE)$(SECONDARY_SIZE_SWE) fs-i6.elf fs-i6-swe.elf
+	-$(RM) $(SECONDARY_SIZE)$(C++_DEPS)$(OBJS)$(C_DEPS)$(ASM_DEPS)$(CC_DEPS)$(SECONDARY_FLASH)$(CPP_DEPS)$(CXX_DEPS)$(C_UPPER_DEPS)$(S_UPPER_DEPS)$(SECONDARY_SIZE_SWE)$(SECONDARY_SIZE_SWE) fs-i6.elf fs-i6-swe.elf 
 	-@echo ' '
 
 secondary-outputs: $(SECONDARY_FLASH) $(SECONDARY_SIZE)

@@ -51,6 +51,8 @@ typedef struct sensorAlarm
 #define VERSION_MAGIC_175 0x175
 #define VERSION_MAGIC 0x176
 #define MIX_SIZE 8
+#define DEPTH_SENSOR_PIXEL_LENGTH 121
+
 //to use this in linker we need to run linker on ld file
 //https://stackoverflow.com/questions/28837199/can-i-use-preprocessor-directives-in-ld-file
 //for now just calcualte
@@ -102,6 +104,8 @@ __attribute__((section (".mod_lastTimerUpdate"))) uint32_t  lastTimerUpdate;
 __attribute__((section (".mod_ticks100ms"))) uint8_t  ticks100MS;
 __attribute__((section (".mod_mavlinkGPSFrame"))) uint8_t mavlinkGPSFrame[22]; 	//22bytes
 __attribute__((section (".mod_maxSNR"))) int32_t maxSNR;
+__attribute__((section (".mod_depthSensorValues "))) uint8_t depthSensorValues[DEPTH_SENSOR_PIXEL_LENGTH]; // Y coordinates of depth image
+__attribute__((section (".mod_depthSensorValuesCount "))) uint8_t depthSensorValuesCount = 0; // Y coordinates of depth image
 
 __attribute__((section (".mod_altSensorMemory"))) uint32_t initPressure = 0;
 __attribute__((section (".mod_altSensorMemory"))) int32_t initTemperature = 0;
